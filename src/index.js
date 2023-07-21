@@ -40,13 +40,6 @@ function onSelect(evt) {
       console.log('selectElData', data);
     })
     .catch(err => console.log(err));
-
-  // fetchBreeds()
-  //   .then(data => {
-  //     catInfo.insertAdjacentHTML('beforeend', createMarkup(data));
-  //     console.log('selectElData2', data);
-  //   })
-  //   .catch(err => console.log(err));
 }
 
 function createMarkup(arr) {
