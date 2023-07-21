@@ -22,6 +22,12 @@ loader.style.display = 'none';
 error.style.display = 'none';
 
 selectEl.addEventListener('change', onSelect);
+catInfo.addEventListener('load', onLoad);
+
+function onLoad() {
+  loader.style.display = 'block';
+  selectEl.style.display = 'none';
+}
 
 function onSelect(evt) {
   console.log(evt.target.value);
@@ -57,7 +63,9 @@ function createMarkup(arr) {
 }
 
 fetchCatByBreed()
-  .then(data => console.log('data', data))
+  .then(data => {
+    console.log('data', data);
+  })
   .catch(err => console.log(err));
 
 fetchBreeds()
