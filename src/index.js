@@ -11,6 +11,8 @@ import axios from 'axios';
 axios.defaults.headers.common['x-api-key'] =
   'live_agxgsuGs9k1hIWSomhDkABE1dRb0BsO47kdnu2VQ5tEjX6Y3fY22rwiSEEN0a94V';
 
+import SlimSelect from 'slim-select';
+
 //const selectEl = document.querySelector('.breed-select');
 //console.log(selectEl);
 //const BASE_URL = 'https://api.thecatapi.com/v1/';
@@ -18,19 +20,21 @@ axios.defaults.headers.common['x-api-key'] =
 const loader = document.querySelector('.loader');
 const error = document.querySelector('.error');
 
+let slimSelect = null;
+console.log('selectEl', selectEl);
+
+// selectEl.style.display = 'none';
 loader.style.display = 'none';
 error.style.display = 'none';
 
 selectEl.addEventListener('change', onSelect);
-catInfo.addEventListener('load', onLoad);
-
-function onLoad() {
-  loader.style.display = 'block';
-  selectEl.style.display = 'none';
-}
 
 function onSelect(evt) {
   console.log(evt.target.value);
+
+  loader.style.display = 'block';
+  selectEl.style.display = 'none';
+  catInfo.style.display = 'none';
 
   let selectId = evt.target.value;
 
@@ -39,11 +43,20 @@ function onSelect(evt) {
       catInfo.insertAdjacentHTML('beforeend', createMarkup(data));
       console.log('selectElData', data);
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+      error.style.display = 'block';
+      // selectEl.style.display = 'none';
+    })
+    .finally(finnaly => {
+      loader.style.display = 'none';
+      //selectEl.style.display = 'block';
+      catInfo.style.display = 'block';
+    });
 }
 
 function createMarkup(arr) {
   console.log('arr', arr);
+
   return arr
     .map(({ url, breeds }) => {
       console.log('breeds', breeds);
@@ -64,8 +77,16 @@ fetchCatByBreed()
 fetchBreeds()
   .then(data => {
     selectEl.insertAdjacentHTML('beforeend', createSelectorOptions(data));
+
+    slimSelect = new SlimSelect({
+      select: selectEl,
+    });
+    console.log('slimSelect', slimSelect);
   })
-  .catch(err => console.log(err));
+  .catch(err => {
+    error.style.display = 'block';
+    // selectEl.style.display = 'none';
+  });
 
 function createSelectorOptions(data) {
   return data
