@@ -1,0 +1,2 @@
+.breed-select{width:200px;margin:10px auto}.loader{width:100px;height:100px;box-sizing:border-box;border:20px solid #aa9f9b;border-bottom-color:#fa6706;border-radius:50%;margin:0 auto;animation:rotation 1s linear infinite;display:flex}.cat-info{flex-direction:row;justify-content:space-between;column-gap:20px}.cat-descr{flex-direction:column;justify-content:space-around;display:flex}@keyframes rotation{0%{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+/*# sourceMappingURL=index.315e24d4.css.map */
