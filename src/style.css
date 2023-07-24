@@ -1,0 +1,37 @@
+.breed-select {
+  margin: 10px auto;
+  width: 200px;
+}
+
+.loader {
+  width: 100px;
+  height: 100px;
+  border: 20px solid #aa9f9b;
+  border-bottom-color: #fa6706;
+  border-radius: 50%;
+  display: flex;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+  margin: 0 auto;
+}
+
+.cat-info {
+  flex-direction: row;
+  column-gap: 20px;
+  justify-content: space-between;
+}
+
+.cat-descr {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

@@ -7,14 +7,23 @@
       href="https://unpkg.com/slim-select@latest/dist/slimselect.css"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="./style.css" />
     <title>Homework 10</title>
   </head>
   <body>
-    <select class="breed-select" id="selectElement"></select>
-    <p class="loader">Loading data, please wait...</p>
-    <p class="error">Oops! Something went wrong! Try reloading the page!</p>
+    <select class="breed-select" id="selectElement">
+      <option data-placeholder="true"></option>
+    </select>
+    <!-- <p class="loader">Loading data, please wait...</p> -->
+    <span class="loader"></span>
+    <!-- <p class="error">Oops! Something went wrong! Try reloading the page!</p> -->
     <div class="cat-info">
-      <!-- <img src="" alt=""><h2></h2><p></p><p></p> -->
+      <!-- <img class="cat-img" src="" alt="" />
+      <div class="cat-descr">
+        <h2></h2>
+        <p></p>
+        <p></p>
+      </div> -->
     </div>
     <script src="https://unpkg.com/slim-select@latest/dist/slimselect.min.js"></script>
     <script src="index.js" type="module"></script>

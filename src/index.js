@@ -10,31 +10,36 @@ import {
 import axios from 'axios';
 axios.defaults.headers.common['x-api-key'] =
   'live_agxgsuGs9k1hIWSomhDkABE1dRb0BsO47kdnu2VQ5tEjX6Y3fY22rwiSEEN0a94V';
-
 import SlimSelect from 'slim-select';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 //const selectEl = document.querySelector('.breed-select');
 //console.log(selectEl);
 //const BASE_URL = 'https://api.thecatapi.com/v1/';
 // const catInfo = document.querySelector('.cat-info');
 const loader = document.querySelector('.loader');
-const error = document.querySelector('.error');
+//const error = document.querySelector('.error');
 
 let slimSelect = null;
 console.log('selectEl', selectEl);
 
 // selectEl.style.display = 'none';
 loader.style.display = 'none';
-error.style.display = 'none';
 
 selectEl.addEventListener('change', onSelect);
 
 function onSelect(evt) {
   console.log(evt.target.value);
 
-  loader.style.display = 'block';
+  // catInfo.img = '';
+  catInfo.slimSelect.disable();
+  loader.style.display = 'flex';
   selectEl.style.display = 'none';
   catInfo.style.display = 'none';
+
+  //slimSelect.settings.hideSelected = 'true';
+
+  console.log('slimSelect.settings', slimSelect.settings);
 
   let selectId = evt.target.value;
 
@@ -44,13 +49,17 @@ function onSelect(evt) {
       console.log('selectElData', data);
     })
     .catch(err => {
-      error.style.display = 'block';
+      Notiflix.Notify.failure(
+        'Oops! Something went wrong! Try reloading the page!'
+      );
       // selectEl.style.display = 'none';
     })
     .finally(finnaly => {
+      slimSelect.enable();
       loader.style.display = 'none';
-      //selectEl.style.display = 'block';
-      catInfo.style.display = 'block';
+      //fetchBreeds().slimSelect;
+      // selectEl.style.display = 'block';
+      catInfo.style.display = 'flex';
     });
 }
 
@@ -62,7 +71,7 @@ function createMarkup(arr) {
       console.log('breeds', breeds);
       return breeds.map(
         ({ name, description, temperament }) =>
-          `<img src="${url}" alt="${name}" width="600"><h2>${name}</h2><p>${description}</p><p>Temperament: ${temperament}</p>`
+          `<img class="cat-img" src="${url}" alt="${name}" width="600"><div class="cat-descr"><h2>${name}</h2><p>${description}</p><p>Temperament: ${temperament}</p></div>`
       );
     })
     .join('');
@@ -80,11 +89,16 @@ fetchBreeds()
 
     slimSelect = new SlimSelect({
       select: selectEl,
+      settings: {
+        placeholderText: 'Select a breed',
+      },
     });
     console.log('slimSelect', slimSelect);
   })
   .catch(err => {
-    error.style.display = 'block';
+    Notiflix.Notify.failure(
+      'Oops! Something went wrong! Try reloading the page!'
+    );
     // selectEl.style.display = 'none';
   });
 
