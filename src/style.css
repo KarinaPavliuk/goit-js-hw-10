@@ -1,3 +1,7 @@
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
 .breed-select {
   margin: 10px auto;
   width: 200px;
@@ -21,10 +25,23 @@
   justify-content: space-between;
 }
 
-.cat-descr {
+.cat-img {
+  width: 400px;
+  height: 400px;
+  object-fit: cover;
+}
+
+.cat-img-caption {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+}
+
+.cat-name {
+  font-weight: bold;
+}
+
+.cat-temperament {
+  font-weight: bold;
 }
 
 @keyframes rotation {
