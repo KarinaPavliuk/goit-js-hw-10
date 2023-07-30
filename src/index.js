@@ -23,12 +23,13 @@ function onSelect(evt) {
 
   fetchCatByBreed(selectId)
     .then(data => {
+      if (!data.length) {
+        Notify.failure('Oops! Something went wrong! Try reloading the page!');
+      }
       catInfo.insertAdjacentHTML('beforeend', createMarkup(data));
     })
     .catch(() => {
-      return Notify.failure(
-        'Oops! Something went wrong! Try reloading the page!'
-      );
+      Notify.failure('Oops! Something went wrong! Try reloading the page!');
     })
     .finally(() => {
       slimSelect.enable();
@@ -59,10 +60,8 @@ fetchBreeds()
       },
     });
   })
-  .catch(err => {
-    return Notify.failure(
-      'Oops! Something went wrong! Try reloading the page!'
-    );
+  .catch(() => {
+    Notify.failure('Oops! Something went wrong! Try reloading the page!');
   });
 
 function createSelectorOptions(data) {
